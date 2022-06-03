@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "redis",
+      "type": "io.swagger.application.configuration.RedisConfiguration",
+      "sourceType": "io.swagger.application.configuration.RedisConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "redis.host",
+      "type": "java.lang.String",
+      "sourceType": "io.swagger.application.configuration.RedisConfiguration"
+    },
+    {
+      "name": "redis.port",
+      "type": "java.lang.Integer",
+      "sourceType": "io.swagger.application.configuration.RedisConfiguration"
+    }
+  ],
+  "hints": []
+}
