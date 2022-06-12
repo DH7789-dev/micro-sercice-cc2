@@ -1,6 +1,6 @@
-package io.swagger.api;
+package io.swagger.web.api;
 
-import io.swagger.model.Payment;
+import io.swagger.web.model.Payment;
 import io.swagger.model.PaymentResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.web.model.Payment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,7 @@ public class PaymentApiController implements PaymentApi {
         this.request = request;
     }
 
+     @Override
     public ResponseEntity<List<Payment>> getPayments() {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
@@ -63,6 +65,7 @@ public class PaymentApiController implements PaymentApi {
         return new ResponseEntity<List<Payment>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    @Override
     public ResponseEntity<PaymentResponse> paymentCreate(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody Payment body) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {

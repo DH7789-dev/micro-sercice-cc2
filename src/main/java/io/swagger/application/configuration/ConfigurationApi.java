@@ -7,14 +7,12 @@ import redis.clients.jedis.JedisPooled;
 @Configuration
 public class ConfigurationApi {
 
-    private final RedisConfiguration redisConfiguration;
 
-    public ConfigurationApi(RedisConfiguration redisConfiguration) {
-        this.redisConfiguration = redisConfiguration;
+    public ConfigurationApi() {
     }
 
     @Bean
     public JedisPooled jedisPool() {
-        return new JedisPooled(redisConfiguration.getHost(), redisConfiguration.getPort());
+        return new JedisPooled("localhost", 6379);
     }
 }

@@ -3,9 +3,9 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package io.swagger.api;
+package io.swagger.web.api;
 
-import io.swagger.model.Payment;
+import io.swagger.web.model.Payment;
 import io.swagger.model.PaymentResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -58,6 +58,5 @@ public interface PaymentApi {
         method = RequestMethod.POST)
     ResponseEntity<PaymentResponse> paymentCreate(@Parameter(in = ParameterIn.DEFAULT, description = "", schema=@Schema()) @Valid @RequestBody Payment body);
 
-    ResponseEntity<PaymentResponse> paymentCreate(Payment body);
 }
 

@@ -1,0 +1,104 @@
+openapi: 3.0.2
+info:
+  title: Payment
+  version: v1
+tags:
+  - name: payment
+paths:
+  /payment:
+    post:
+      tags:
+        - payment
+      summary: Process payment
+      description: Create payment
+      operationId: paymentCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Payment succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+        '400':
+          description: Payment failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponse'
+              example:
+                payment_status: failure
+                checkout_id: f9a8d8a0-c8b9-4b1a-b1a1-f9a8d8a0c8b9
+    get:
+      tags:
+        - payment
+      summary: Get all payments success
+      operationId: getPayments
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+components:
+  schemas:
+    BuyerInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: id
+        name:
+          type: string
+    PaymentOrder:
+      type: object
+      properties:
+        seller_account:
+          type: string
+        amount:
+          type: number
+          format: double
+        currency:
+          type: string
+          description: Currency of the amount respecting ISO 4217
+          minLength: 3
+          maxLength: 4
+        payment_order_id:
+          type: integer
+          format: id
+    Payment:
+      type: object
+      properties:
+        buyer_info:
+          $ref: '#/components/schemas/BuyerInfo'
+        checkout_id:
+          type: string
+          format: uuid
+          example: f8a8c8e7-b8b6-4b8b-8b8b-8b8b8b8b8b8b
+        credit_card_info:
+          type: string
+          description: credit card information.
+        payment_orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentOrder'
+    PaymentStatus:
+      type: string
+      enum:
+        - success
+        - failure
+    PaymentResponse:
+      type: object
+      properties:
+        payment_status:
+          $ref: '#/components/schemas/PaymentStatus'
+        checkout_id:
+          type: integer
+          format: id

@@ -1,4 +1,4 @@
-package io.swagger.api;
+package io.swagger.web.api;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2022-06-03T12:08:44.079Z[GMT]")
 public class ApiException extends Exception {

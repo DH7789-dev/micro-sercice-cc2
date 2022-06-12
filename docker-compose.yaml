@@ -1,0 +1,39 @@
+version: "3.2"
+services:
+  redis:
+    image: "redis:alpine"
+    ports:
+     - "6379:6379"
+    networks:
+      - payment-network
+
+  save-swagger:
+    image: busybox
+    depends_on:
+      - redis
+    volumes:
+      - swagger-json:/spec
+    command: >
+      /bin/sh -c "sleep 15
+      && mkdir -p /spec
+      && wget -O /spec/swagger.json"
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    expose:
+      - 8080
+    ports:
+      - 8029:8080
+    environment:
+      XSWAGGER_JSON: /spec/swagger.json
+
+    volumes:
+      - swagger-json:/spec
+    networks:
+      - payment-network
+
+
+# networking for the Redis container
+networks:
+  payment-network:
+    driver: bridge

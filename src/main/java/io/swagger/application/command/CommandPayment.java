@@ -2,11 +2,12 @@ package io.swagger.application.command;
 
 
 import io.swagger.model.PaymentResponse;
+import io.swagger.web.api.PaymentApi;
 import io.swagger.web.model.Payment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import io.swagger.api.PaymentApi;
+import io.swagger.web.api.PaymentApi;
 import redis.clients.jedis.JedisPooled;
 import io.swagger.model.PaymentStatus;
 import io.swagger.model.PaymentOrder;
